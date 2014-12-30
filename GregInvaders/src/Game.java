@@ -18,7 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
-
+//SETTING A PEONARRAY TO NULL WILL DELETE THE OBJECT 
+//SETUP A FURTHEST UP VARIABLE IN AI 
 public class Game extends JPanel implements KeyListener {
 	
 	private int gameX = 500;
@@ -32,12 +33,14 @@ public class Game extends JPanel implements KeyListener {
 
 	
 	//generates peons for the game
-	Peon peonArray[] = ai.placePeons(20);
+	Peon peonArray[] = ai.placePeons(10);
 	
 	private boolean hitRightBoundry = false;
 	private boolean hitLeftBoundry = false;
 	private boolean hitdownBoundry = false;
 	private boolean hitUpBoundry = true;
+	
+	
 	
 	public void paintComponent(Graphics g){
 		
@@ -51,26 +54,39 @@ public class Game extends JPanel implements KeyListener {
 		Wall.paintComponent(g); //set wall
 		p.paintComponent(g);
 
-
-	
 		
+		peonArray[0]=null;
+		
+		//any peon furthest to the right
+		int furthestRightPeon=ai.furthestRightPeon(peonArray);
+		
+		//top left peon
+		int furthestLeftPeon=ai.furthestLeftPeon(peonArray);
+		
+		//any peon furthest to the bottom
+		int furthestDownPeon=ai.furthestDownPeon(peonArray);
+
 		for(int i = 0;i<peonArray.length;i++)
 		{
-			peonArray[i].paintComponent(g);
-			
+			if(peonArray[i] != null)
+			{
+				peonArray[i].paintComponent(g);
+			}
+		}	
 			//right bounds 
-			if(peonArray[i].getxPos()>=gameX-peonArray[i].getWidth() && !hitRightBoundry)
+			if(peonArray[furthestRightPeon].getxPos()>=gameX-peonArray[furthestRightPeon].getWidth()
+					&& !hitRightBoundry)
 			{
 				hitRightBoundry = true;
 				hitLeftBoundry = false;
 				hitdownBoundry = false;
 				hitUpBoundry = false;
-		
-				System.out.println("Right Hit");
+			
+				
 			}
 	
 			//left bounds 
-			if(peonArray[i].getxPos()<=wallWidth)
+			if(peonArray[furthestLeftPeon].getxPos()<=wallWidth)
 			{
 				hitLeftBoundry = true;
 				hitRightBoundry = false;
@@ -79,7 +95,7 @@ public class Game extends JPanel implements KeyListener {
 			}
 			
 			//down bounds 
-			if(peonArray[i].getyPos()>=gameY-100 && !hitLeftBoundry)
+			if(peonArray[furthestDownPeon].getyPos()>=gameY-100 && !hitLeftBoundry)
 			{
 				 hitdownBoundry = true;
 				 hitRightBoundry = false;
@@ -88,7 +104,7 @@ public class Game extends JPanel implements KeyListener {
 			}
 			
 			//up bounds 
-			if(peonArray[i].getyPos()<=wallWidth+10 && !hitRightBoundry)
+			if(peonArray[furthestLeftPeon].getyPos()<=wallWidth+10 && !hitRightBoundry)
 			{
 				 hitdownBoundry = false;
 				 hitRightBoundry = false;
@@ -97,38 +113,64 @@ public class Game extends JPanel implements KeyListener {
 			}
 			
 			
+			
+			for(int i = 0;i<peonArray.length;i++)
+			{
+				
 			if(hitRightBoundry)
 			{
+				
+				
+				if(peonArray[i] != null)
+				{
+					peonArray[i].paintComponent(g);
+				
+				
 				peonArray[i].setMoveLeft(false);
 				peonArray[i].setMoveRight(false);
 				peonArray[i].setMoveUp(false);
 				peonArray[i].setMoveDown(true);
 				
-				
+				}
 			}
 			
 			if(hitdownBoundry)
 			{
+				if(peonArray[i] != null)
+				{
+					peonArray[i].paintComponent(g);
+				
 				peonArray[i].setMoveLeft(true);
 				peonArray[i].setMoveRight(false);
 				peonArray[i].setMoveUp(false);
 				peonArray[i].setMoveDown(false);
+				}
 			}
 			
 			if(hitLeftBoundry)
 			{
+				if(peonArray[i] != null)
+				{
+					peonArray[i].paintComponent(g);
+				
 				peonArray[i].setMoveLeft(false);
 				peonArray[i].setMoveUp(true);
 				peonArray[i].setMoveDown(false);
 				peonArray[i].setMoveRight(false);
+				}
 			}
 			
 			if(hitUpBoundry)
-			{
-				peonArray[i].setMoveLeft(false);
-				peonArray[i].setMoveUp(false);
-				peonArray[i].setMoveDown(false);
-				peonArray[i].setMoveRight(true);
+			{		
+				if(peonArray[i] != null)
+				{
+					peonArray[i].paintComponent(g);
+				
+					peonArray[i].setMoveLeft(false);
+					peonArray[i].setMoveUp(false);
+					peonArray[i].setMoveDown(false);
+					peonArray[i].setMoveRight(true);
+				}
 			}
 		
 			

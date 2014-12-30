@@ -4,6 +4,9 @@ import java.awt.Graphics;
 //basic enemy 
 public class Peon extends Shapes{
 
+	//movespeed
+	private int moveSpeed = 1;
+	
 	//initial x
 	private int xPos;
 	//initial y
@@ -29,22 +32,22 @@ public class Peon extends Shapes{
 
 		if(moveRight)
 		{
-			xPos++;
+			xPos+=moveSpeed;
 		}
 		
 		if(moveLeft)
 		{
-			xPos--;
+			xPos-=moveSpeed;
 		}
 		
 		if(moveDown)
 		{
-			yPos++;
+			yPos+=moveSpeed;
 		}
 		
 		if(moveUp)
 		{
-			yPos--;
+			yPos-=moveSpeed;
 		}
 		
 	//main body	

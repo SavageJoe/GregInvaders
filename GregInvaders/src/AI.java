@@ -41,7 +41,98 @@ public class AI {
 			return peon;
 		}//end placePeons 
 	
+		//grabs any peon furthest to the right
+		int furthestRightPeon(Peon[] peonArray){
 		
-
+		int furthestRightPeon=0;
+		int thisPeonX = 0;
+		int thisPeonY = 0;
+		
+		for(int i = 0;i<peonArray.length;i++)
+		{
+			if(peonArray[i] != null)
+			{
+					//peonArray[i].paintComponent(g);
+				
+				int currentPeonX = peonArray[i].getxPos();
+				int currentPeonY = peonArray[i].getyPos();
+				
+				
+				
+				if(currentPeonX>thisPeonX )//|| currentPeonY>thisPeonY)
+				{
+					
+					thisPeonX = currentPeonX;
+					thisPeonY= currentPeonY;
+					
+					furthestRightPeon = i;
+								
+				}
+			}
+			
+		}
+		return furthestRightPeon;
+	}//end furthestRightPeon
+		
+		//top left
+		int furthestLeftPeon(Peon[] peonArray){
+			
+		int furthestLeftPeon=0;
+		int thisPeonX = 1000;
+		int thisPeonY = 1000;
+		
+		for(int i = 0;i<peonArray.length;i++)
+		{
+			if(peonArray[i] != null)
+			{
+				
+				int currentPeonX = peonArray[i].getxPos();
+				int currentPeonY = peonArray[i].getyPos();
+				
+				if(currentPeonX<thisPeonX || currentPeonY<thisPeonY)
+				{
+					thisPeonX = currentPeonX;
+					thisPeonY= currentPeonY;
+					
+					furthestLeftPeon = i;
+						
+				}
+			}
+			
+		}
+		return furthestLeftPeon;
+	}//end furthestRightPeon
+		
+		//grabs one of the lowest peons
+		int furthestDownPeon(Peon[] peonArray){
+			
+		int furthestRightPeon=0;
+		int thisPeonX = 0;
+		int thisPeonY = 0;
+		
+		for(int i = 0;i<peonArray.length;i++)
+		{
+			if(peonArray[i] != null)
+			{
+			
+			
+			int currentPeonX = peonArray[i].getxPos();
+			int currentPeonY = peonArray[i].getyPos();
+			
+			if(currentPeonY>thisPeonY )//|| currentPeonY>thisPeonY)
+			{
+				
+				thisPeonX = currentPeonX;
+				thisPeonY= currentPeonY;
+				
+				furthestRightPeon = i;
+							
+			}
+			}
+			
+		}
+		return furthestRightPeon;
+	}//end furthestRightPeon
+		
 		
 }//end class 
